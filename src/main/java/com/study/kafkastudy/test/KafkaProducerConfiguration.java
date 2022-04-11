@@ -16,7 +16,7 @@ import org.springframework.kafka.core.ProducerFactory;
 
 @Configuration
 @EnableKafka
-public class KafkaConfiguration {
+public class KafkaProducerConfiguration {
 
 	@Autowired
 	private Environment env;
@@ -24,11 +24,11 @@ public class KafkaConfiguration {
 	public Map<String, Object> producerConfigs(){
 		
 		Map<String, Object> props = new HashMap<String, Object>();
-		//server host ¹× port ÁöÁ¤	
+		//server host ë° port ì§€ì •
 		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, env.getProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG));
-		//key serialize ÁöÁ¤
+		//key serialize ì§€ì •
 		props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-		//value serialize ÁöÁ¤ 
+		//value serialize ì§€ì • 
 		props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		
 		return props;
@@ -40,7 +40,7 @@ public class KafkaConfiguration {
 	
 	@Bean
 	public KafkaTemplate<String, String> kafkaTemplate(){
-		// BeanÀ» ÅëÇÏ¿© ÀÇÁ¸¼º ÁÖÀÔ
+		// Beanì„ í†µí•˜ì—¬ ì˜ì¡´ì„± ì£¼ì…
 		return new KafkaTemplate<String, String>(producerFactory());
 	}
 	
